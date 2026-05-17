@@ -1,7 +1,7 @@
 ---
 name: ts-functional-mind
 description: "Use when refactoring long TypeScript files into smaller, testable functional units while preserving behavior and avoiding premature abstraction. Trigger: /ts-functional-mind"
-allowed-tools: Bash(pnpm:*), Bash(graphify:*), Bash(git:*), Read, Edit, MultiEdit
+allowed-tools: Bash(pnpm:*), Bash(git:*), Read, Edit, MultiEdit
 ---
 
 # TypeScript Functional Mind
@@ -79,10 +79,4 @@ Run the project-specific checks after each meaningful pass:
 pnpm typecheck
 pnpm test
 pnpm build
-```
-
-After code changes, update the graph when graphify is available:
-
-```bash
-graphify update .
 ```

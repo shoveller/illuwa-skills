@@ -1,7 +1,7 @@
 ---
 name: ts-functional-mind-react
 description: "Use when refactoring long TypeScript React files into smaller, testable functional units while preserving behavior, rendering contracts, and state ownership. Trigger: /ts-functional-mind-react"
-allowed-tools: Bash(pnpm:*), Bash(graphify:*), Bash(git:*), Read, Edit, MultiEdit
+allowed-tools: Bash(pnpm:*), Bash(git:*), Read, Edit, MultiEdit
 ---
 
 # TypeScript Functional Mind React
@@ -122,10 +122,4 @@ Run the project-specific checks after each meaningful pass:
 pnpm typecheck
 pnpm test
 pnpm build
-```
-
-After code changes, update the graph when graphify is available:
-
-```bash
-graphify update .
 ```
