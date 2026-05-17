@@ -4,8 +4,7 @@
   "private": true,
   "description": "Illuwa skills for skills.sh compatible agents",
   "scripts": {
-    "list": "find skills -name SKILL.md -maxdepth 3 | sort",
-    "validate": "skills validate ."
+    "list": "npx skills add . --list --full-depth"
   },
   "devDependencies": {}
 }

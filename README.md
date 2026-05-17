@@ -1,6 +1,6 @@
 # illuwa-skills
 
-Skills shared by Illuwa for Claude Code and other AI agents. This repository follows the simple `skills.sh` / `npx skills` layout: each skill lives under `skills/<skill-name>/SKILL.md`.
+Skills shared by Illuwa for Claude Code, OpenCode, and other skills.sh-compatible AI agents. This repository follows the `skills.sh` / `npx skills` layout: each skill lives under `skills/<skill-name>/SKILL.md`.
 
 ## Installation
 
@@ -8,50 +8,79 @@ Skills shared by Illuwa for Claude Code and other AI agents. This repository fol
 npx skills add shoveller/illuwa-skills
 ```
 
+Install a specific skill:
+
+```bash
+npx skills add shoveller/illuwa-skills --skill ts-functional-mind
+npx skills add shoveller/illuwa-skills --skill ts-functional-mind-react
+npx skills add shoveller/illuwa-skills --skill skill-moment-capture
+```
+
 ## Available Skills
 
 | Skill | Description |
 |-------|-------------|
-| [syncpack-monorepo-setup](#syncpack-monorepo-setup) | Add syncpack as a monorepo version-drift guard, including root scripts and postinstall wiring. |
-| [syncpack-version-drift](#syncpack-version-drift) | Diagnose and fix dependency version drift across pnpm/npm/yarn monorepos with syncpack. |
+| [ts-functional-mind](#ts-functional-mind) | Refactor long TypeScript files into smaller, testable functional units while preserving behavior. |
+| [ts-functional-mind-react](#ts-functional-mind-react) | Refactor long TypeScript React files while preserving rendering contracts, state ownership, and side-effect ordering. |
+| [skill-moment-capture](#skill-moment-capture) | Capture reusable session judgments, checklists, workflows, and failure-prevention rules as skills. |
 
 ---
 
-### syncpack-monorepo-setup
+### ts-functional-mind
 
-Use this when a TypeScript/JavaScript monorepo needs a lightweight dependency version synchronization system. The skill adds `syncpack` at the repository root, wires safe scripts, and optionally adds `postinstall` so installs converge dependency versions.
+Use when a TypeScript file has grown long because side effects, data conversion, domain logic, and variants are mixed together.
 
 ```bash
-/syncpack-monorepo-setup
+/ts-functional-mind
 ```
 
 Core behavior:
 
-- Detect package manager and monorepo workspace files.
-- Keep syncpack as a root dev tool, not an app runtime dependency.
-- Add `deps:check`, `deps:fix`, and optionally `postinstall` scripts.
-- Verify with `syncpack list-mismatches` and `syncpack fix --dry-run` when supported.
+- Identify behavioral contracts before moving code.
+- Extract pure functions before extracting effect coordinators.
+- Avoid premature abstractions and generic helpers used only once.
+- Preserve API payloads, ids, path strings, persisted data, and side-effect ordering.
+- Verify with `pnpm typecheck`, `pnpm test`, `pnpm build`, and `graphify update .` when available.
 
 ---
 
-### syncpack-version-drift
+### ts-functional-mind-react
 
-Use this when packages in a monorepo have diverging dependency ranges or when CI/local installs behave differently across apps and packages.
+Use when a TypeScript React file has grown long because rendering, state ownership, side effects, data conversion, and UI variants are mixed together.
 
 ```bash
-/syncpack-version-drift
+/ts-functional-mind-react
 ```
 
 Core behavior:
 
-- Inspect dependency mismatches without rewriting first.
-- Use `syncpack list-mismatches` to locate drift.
-- Use `syncpack fix` only after reviewing the intended changes.
-- Reinstall and run the smallest available package-manager/typecheck validation.
+- Extract pure data/view helpers before hooks or context.
+- Split stateless leaves before moving API calls or state ownership.
+- Treat multiple direct `useState` or `useEffect` calls as a signal to inspect workflow ownership.
+- Preserve ids, keys, aria labels, drag payloads, and event ordering.
+- Verify with `pnpm typecheck`, `pnpm test`, `pnpm build`, and `graphify update .` when available.
+
+---
+
+### skill-moment-capture
+
+Use when a session reveals a reusable judgment, checklist, workflow, or failure-prevention rule that should become a skill or be added to an existing skill.
+
+```bash
+/skill-moment-capture
+```
+
+Core behavior:
+
+- Identify the future trigger phrase or situation.
+- Decide whether to update an existing skill or create a new one.
+- Extract commands, paths, safety rules, and verification steps.
+- Avoid one-off implementation details and secrets.
+- Write operational instructions, not a retrospective.
 
 ## Source note
 
-These skills are distilled from Illuwa's monorepo template notes about treating syncpack as a **version drift control** layer, not just a convenience script.
+These skills are distilled from Illuwa's TypeScript scaffold skill-set recipe and adapted to the public `skills.sh` repository layout.
 
 ## License
 
