@@ -14,7 +14,6 @@ Install a specific skill:
 npx skills add shoveller/illuwa-skills --skill ts-functional-mind
 npx skills add shoveller/illuwa-skills --skill ts-functional-mind-react
 npx skills add shoveller/illuwa-skills --skill skill-moment-capture
-npx skills add shoveller/illuwa-skills --skill kiwifs
 ```
 
 ## Available Skills
@@ -24,7 +23,6 @@ npx skills add shoveller/illuwa-skills --skill kiwifs
 | [ts-functional-mind](#ts-functional-mind) | Refactor long TypeScript files into smaller, testable functional units while preserving behavior. |
 | [ts-functional-mind-react](#ts-functional-mind-react) | Refactor long TypeScript React files while preserving rendering contracts, state ownership, and side-effect ordering. |
 | [skill-moment-capture](#skill-moment-capture) | Capture reusable session judgments, checklists, workflows, and failure-prevention rules as skills. |
-| [kiwifs](#kiwifs) | Operate a KiwiFS knowledge base through MCP: markdown CRUD, search, graph, Kanban workflows, analytics, imports, drafts, and quality checks. |
 
 ---
 
@@ -82,21 +80,15 @@ Core behavior:
 
 ---
 
-### kiwifs
+## Moved Skills
 
-Use when an agent should read, search, write, maintain, or operate a KiwiFS knowledge base through MCP tools rather than treating it as a plain markdown folder.
+The KiwiFS MCP skill now lives in a dedicated public package:
 
 ```bash
-/kiwifs
+npx skills add shoveller/kiwifs-agent-skills --skill kiwifs
 ```
 
-Core behavior:
-
-- Prefer KiwiFS MCP over direct filesystem or Obsidian-style CRUD for canonical wiki knowledge.
-- Search before writing; update existing canonical pages before creating duplicates.
-- Use markdown CRUD, backlinks, graph analytics, DQL/query, saved views, canvas, imports, drafts, task claims, and workflow/Kanban tools as appropriate.
-- Run lint/health checks after edits and report exact paths or URLs.
-- Keep secrets and private credentials out of wiki pages.
+Repository: https://github.com/shoveller/kiwifs-agent-skills
 
 ## Source note
 
