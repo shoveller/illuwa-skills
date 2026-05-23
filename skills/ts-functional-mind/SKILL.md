@@ -30,11 +30,28 @@ Separate by volatility and testability, not by aesthetic symmetry.
 3. Event handlers with stable contracts: only after the caller and callee boundaries are clear.
 4. Effect coordinators: only when they own a coherent side-effect lifecycle.
 
+## Strict Functional Baseline
+
+- Prefer `const` for local bindings; treat `let` as a refactor smell until a pure value-returning helper has been considered.
+- Do not mutate function parameters or parameter-object properties; create and return a new value or copy.
+- Prefer returning new values over accumulator/state mutation.
+- Allow a little duplication when it keeps helpers pure and avoids hidden mutation.
+- Prefer `const helper = (...) => {}` for new local helpers when project conventions allow it; keep existing public APIs, framework contracts, or hoisting-dependent declarations intact.
+
+## Collection Transformation Rules
+
+- Prefer `map`, `filter`, `reduce`, `flatMap`, spread, and `slice` for collection transformations.
+- Avoid mutating array methods such as `push`, `pop`, `shift`, `unshift`, `splice`, `reverse`, and `fill` on caller-owned data.
+- Prefer `toSorted` and `toReversed` when available; otherwise copy first with `[...items].sort(...)` or `[...items].reverse()`.
+- Allow imperative loops for performance hot paths, stream/iterator control, or intentional long-running loops, but leave a clear reason and tests.
+
 ## Conditional Logic Rules
 
 - Replace conditional expressions with named pure state or message helpers plus guard-clause branching.
 - Do not use ternary expressions, IIFEs, switch statements, `else`, or `else if` to hide branching inside expression-heavy paths.
 - Prefer early returns, guard clauses, lookup maps, or named branch helpers.
+- Prefer block-bodied guard clauses when the formatter/linter allows it, so later side-effect additions are visible in review.
+- Name booleans positively when possible: prefer `succeeded`, `isValid`, and `enableCheck` over `notFailed`, `isNotValid`, and `disableCheck`.
 - Prefer pure helpers that return state, labels, messages, or data objects instead of framework output.
 - Preserve side-effect ordering when extracting conditionals from handlers.
 - Classify each branch as data selection, state transition, or view selection before extracting it.
@@ -69,6 +86,7 @@ Separate by volatility and testability, not by aesthetic symmetry.
 - A local state shape implicitly models a workflow state machine.
 - A helper needs framework imports but claims to be domain logic.
 - A rename changes API payload shape, sortable ids, path strings, or persisted frontmatter.
+- A refactor mutates input parameters, caller-owned arrays, or parameter-object properties.
 - A refactor creates a generic abstraction used only once.
 
 ## Verification

@@ -33,6 +33,21 @@ Separate React concerns by volatility and testability, not by aesthetic symmetry
 5. Hooks: only when they own a coherent side-effect lifecycle.
 6. Context: only when prop threading crosses unrelated subtrees.
 
+## Strict Functional Baseline
+
+- Prefer `const` for local bindings; treat `let` as a refactor smell until a pure helper or view-state helper has been considered.
+- Do not mutate props, function parameters, or parameter-object properties; create and return a new value or copy.
+- Allow a little duplication when it keeps helpers pure and avoids hidden mutation in render paths.
+- Prefer `const helper = (...) => {}` for new local helpers when project conventions allow it.
+- Prefer arrow components when they do not break existing export contracts, route conventions, or framework-required boundaries.
+
+## Collection Transformation Rules
+
+- Prefer `map`, `filter`, `reduce`, `flatMap`, spread, and `slice` before list rendering.
+- Avoid mutating array methods such as `push`, `pop`, `shift`, `unshift`, `splice`, `reverse`, and `fill` on props, state, or caller-owned data.
+- Prefer `toSorted` and `toReversed` when available; otherwise copy first with `[...items].sort(...)` or `[...items].reverse()`.
+- Extract drag-and-drop reorder math and optimistic list updates into pure helpers before moving handlers.
+
 ## React Rules
 
 - Allow at most one direct `useState` and at most one direct `useEffect` in a React component body.
@@ -64,9 +79,15 @@ Separate React concerns by volatility and testability, not by aesthetic symmetry
 - Replace JSX ternaries with named pure view-state helpers, extracted leaf components, or explicit conditional rendering.
 - Do not use ternary expressions, IIFEs, switch statements, `else`, or `else if` in render paths, handlers, or helpers.
 - Prefer `return null`, early returns, guard clauses, lookup maps, and small leaf components.
+- Prefer block-bodied guard clauses when the formatter/linter allows it, so later side-effect additions are visible in review.
+- Name booleans positively when possible: prefer `succeeded`, `isValid`, and `enableCheck` over `notFailed`, `isNotValid`, and `disableCheck`.
 - Prefer pure helpers that return view state, labels, messages, or data objects instead of JSX.
 - Preserve side-effect ordering when extracting conditionals from event handlers.
 - Classify each branch as data selection, state transition, or view selection before extracting it.
+
+## Error View-State Helper Pattern
+
+When an error boundary or status view declares `let message/details/stack` and rewrites them through `else if` branches or ternaries, split the values into pure helpers such as `getMessage(error)`, `getDetails(error)`, and `getStack(error)`. Keep those helpers returning primitives or view models, then let the render path read already-computed state. A little condition duplication is better than hidden mutation in JSX.
 
 ## TypeScript Rules
 
@@ -100,6 +121,7 @@ Separate React concerns by volatility and testability, not by aesthetic symmetry
 - A helper needs React imports but claims to be domain logic.
 - A new component receives the whole parent state object because its boundary is unclear.
 - A rename changes API payload shape, sortable ids, path strings, or persisted frontmatter.
+- A refactor mutates props, state arrays, input parameters, or parameter-object properties.
 - A refactor creates a generic abstraction used only once.
 
 ## Complex Interaction Pattern
