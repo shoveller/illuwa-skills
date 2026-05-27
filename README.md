@@ -19,6 +19,7 @@ npx skills add shoveller/illuwa-skills --skill cloudflare-do-storage-caching
 npx skills add shoveller/illuwa-skills --skill cloudflare-mcpagent
 npx skills add shoveller/illuwa-skills --skill edgefastmcp-cloudflare
 npx skills add shoveller/illuwa-skills --skill hono-cloudflare-worker
+npx skills add shoveller/illuwa-skills --skill youtube-scrap
 ```
 
 ## Available Skills
@@ -33,6 +34,7 @@ npx skills add shoveller/illuwa-skills --skill hono-cloudflare-worker
 | [cloudflare-mcpagent](#cloudflare-mcpagent) | Build stateful remote MCP servers on Cloudflare Workers with Agents SDK `McpAgent` and Durable Objects. |
 | [edgefastmcp-cloudflare](#edgefastmcp-cloudflare) | Build stateless MCP servers on Cloudflare Workers without Durable Objects. |
 | [hono-cloudflare-worker](#hono-cloudflare-worker) | Wire Cloudflare Worker entrypoints with Hono routes, Wrangler config, Vite, bindings, and route tests. |
+| [youtube-scrap](#youtube-scrap) | Investigate lecture-style YouTube/web sources with NotebookLM, preserve chronology and nuance, and save frontmatter-bearing Markdown notes when a vault is specified. |
 
 ---
 
@@ -163,6 +165,22 @@ Core behavior:
 - Let Hono own HTTP routing and small status/help pages.
 - Preserve Worker named exports such as Durable Object classes.
 - Verify with route tests, `wrangler types`, typecheck, and build.
+
+---
+
+### youtube-scrap
+
+Use when asked to investigate a lecture-style YouTube video or web page with NotebookLM and optionally save the result to a Markdown vault/wiki.
+
+```bash
+/youtube-scrap
+```
+
+Core behavior:
+- Use NotebookLM MCP for the actual source investigation.
+- Preserve the source's intent, emphasis, warning strength, and chronology.
+- Use real timestamps as the outline when available; never invent MM:SS values.
+- If the user specifies a Markdown vault/wiki, save the final note there as a frontmatter-bearing wiki document, then validate and report the path/URL.
 
 ---
 
