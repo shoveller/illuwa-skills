@@ -76,11 +76,24 @@ Default assumptions when unspecified:
 
 Apply these local preferences whenever they do not conflict with meaning preservation or genre:
 
-1. **Prefer active voice.** Convert passive wording to active wording when the actor is clear or can remain implicit in Korean: `쓰인다` → `쓴다`, `설정된다` → `설정한다`, `사용된다` → `사용한다`.
-2. **Soften overly colloquial or harsh operational wording.** In guides, lecture notes, reports, and runbooks, replace casual verbs with calmer task-oriented verbs when the meaning permits: `죽는다` → `멈춘다`, `잡는다` → `설정한다` or `연결한다` depending on context.
-3. **Unpack dense Sino-Korean compounds.** When a compressed or heavy 한자어 makes the sentence stiff, replace it with plain Korean without weakening the claim: `고권한`/`고권` → `높은 권한`, `권한 상승` → `권한이 높아짐` when appropriate.
-4. **Compress translated English essay tone into dry technical-blog prose.** Avoid English-essay calques and explanatory filler such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, and `충분하지 않다`. Prefer short sentences, verbs over abstract nouns, minimal connectives, and direct wording. `핵심은 ~이다` is acceptable; extended essay-like framing is not.
-5. **Use clear topic-first sentences.** Put the action or conclusion first when it saves the reader time, then separate conditions or caveats into the next sentence. Prefer `세션을 백그라운드로 분리합니다. 세션을 끝내지 않습니다.` over `세션을 완전히 끝내지 않고, 백그라운드로 분리합니다.`
+1. **Use Korean technical-document plain style.** For manuals, lecture notes, runbooks, and technical docs, use declarative endings such as `~한다`, `~된다`, `~이다`; do not use polite present endings such as `~합니다`, `~됩니다`, `~입니다` unless the source genre requires polite speech.
+2. **Preserve meaning while tightening into manual prose.** Keep facts, warnings, and emphasis unchanged, but remove filler and write concise task-oriented sentences. Prefer subject omission when the subject is obvious in Korean.
+3. **Prefer active voice and direct predicates.** Convert needless passive or translationese to active wording when the actor is clear or can remain implicit: `설정됩니다` → `설정한다`, `사용됩니다` → `사용한다`, `확인됩니다` → `확인한다`.
+4. **Minimize weak report-style formulas.** Avoid or reduce `~로 언급됩니다`, `~로 확인됩니다`, `~할 수 있습니다`, `~하는 것이 가능합니다`. Prefer direct forms: `~로 언급한다`, `~로 확인한다`, `~할 수 있다`, or stronger wording when the original meaning permits.
+5. **Soften overly colloquial or harsh operational wording.** In guides, lecture notes, reports, and runbooks, replace casual verbs with calmer task-oriented verbs when the meaning permits: `죽는다` → `멈춘다`, `잡는다` → `설정한다` or `연결한다` depending on context.
+6. **Unpack dense Sino-Korean compounds.** When a compressed or heavy 한자어 makes the sentence stiff, replace it with plain Korean without weakening the claim: `고권한`/`고권` → `높은 권한`, `권한 상승` → `권한이 높아짐` when appropriate.
+7. **Compress translated English essay tone into dry technical-blog prose.** Avoid English-essay calques and explanatory filler such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, and `충분하지 않다`. Prefer short sentences, verbs over abstract nouns, minimal connectives, and direct wording. `핵심은 ~이다` is acceptable; extended essay-like framing is not.
+8. **Use clear topic-first sentences.** Put the action or conclusion first when it saves the reader time, then separate conditions or caveats into the next sentence. Prefer `세션을 백그라운드로 분리한다. 세션을 끝내지 않는다.` over `세션을 완전히 끝내지 않고, 백그라운드로 분리합니다.`
+
+Example:
+
+```text
+Input:
+설치 후 tmux -V로 버전을 확인합니다. 강의 기준 버전은 3.5A로 언급됩니다.
+
+Output:
+설치 후 tmux -V로 버전을 확인한다. 강의 기준 버전은 3.5A로 언급한다.
+```
 
 ## Modes
 
@@ -138,7 +151,7 @@ Severity convention:
 1. **Save or isolate the input** if operating on files. Keep the original intact.
 2. **Estimate genre/register** from the text, not from your preferred style.
 3. **Scan for S1 first**: double passive, `가지고 있다`, formulaic conclusions, emoji/decorative headings, pronoun translationese, repeated connectives.
-4. **Scan for user style overrides**: passive verbs that can become active, overly colloquial operational verbs, compressed 한자어 such as `고권한`, English-essay calques such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, `충분하지 않다`, and sentences that hide the main action behind a condition or subordinate clause.
+4. **Scan for user style overrides**: polite present endings in technical docs, passive/report-style formulas, passive verbs that can become active, overly colloquial operational verbs, compressed 한자어 such as `고권한`, English-essay calques such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, `충분하지 않다`, and sentences that hide the main action behind a condition or subordinate clause.
 5. **Scan for S2 density**: `통해`, `에 대해`, `할 수 있다`, hedging, `것이다`, nominalization, uniform sentence lengths.
 6. **Rewrite in this order**:
    1. D — signature phrases and hollow conclusions;
@@ -211,7 +224,7 @@ When editing files, write the polished output to a new file unless the user expl
 - [ ] Genre and register match the input unless the user asked otherwise.
 - [ ] S1 patterns were removed or explicitly justified as retained.
 - [ ] Repeated S2 density was reduced without over-editing.
-- [ ] User style overrides were checked when applicable: passive→active, overly colloquial operational verbs softened, dense Sino-Korean compounds unpacked, translated English essay tone compressed into dry technical-blog prose, and buried main actions rewritten as clear topic-first sentences without meaning drift.
+- [ ] User style overrides were checked when applicable: technical-document plain style (`~한다`, `~된다`, `~이다`), concise subject-light manual prose, passive/report-style formula reduction, passive→active, overly colloquial operational verbs softened, dense Sino-Korean compounds unpacked, translated English essay tone compressed into dry technical-blog prose, and buried main actions rewritten as clear topic-first sentences without meaning drift.
 - [ ] No new examples, metaphors, facts, or causal claims were added.
 - [ ] Change rate feels below 30%; if not, risk is reported.
 - [ ] The user receives either the polished text or a file path plus a concise report.
