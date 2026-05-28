@@ -72,6 +72,14 @@ Default assumptions when unspecified:
 5. **Over-polish guard** — change rate above 30% requires caution; above 50% usually means stop, report risk, and ask for human review.
 6. **Do-not-touch spans** — preserve proper nouns, product/model names, institution names, numbers, dates, units, direct quotes, legal/regulatory clauses, formulas, and standard abbreviations such as LLM, GPU, MCP, API.
 
+## User Style Overrides
+
+Apply these local preferences whenever they do not conflict with meaning preservation or genre:
+
+1. **Prefer active voice.** Convert passive wording to active wording when the actor is clear or can remain implicit in Korean: `쓰인다` → `쓴다`, `설정된다` → `설정한다`, `사용된다` → `사용한다`.
+2. **Soften overly colloquial or harsh operational wording.** In guides, lecture notes, reports, and runbooks, replace casual verbs with calmer task-oriented verbs when the meaning permits: `죽는다` → `멈춘다`, `잡는다` → `설정한다` or `연결한다` depending on context.
+3. **Unpack dense Sino-Korean compounds.** When a compressed or heavy 한자어 makes the sentence stiff, replace it with plain Korean without weakening the claim: `고권한`/`고권` → `높은 권한`, `권한 상승` → `권한이 높아짐` when appropriate.
+
 ## Modes
 
 ### Fast Mode — default
@@ -128,17 +136,18 @@ Severity convention:
 1. **Save or isolate the input** if operating on files. Keep the original intact.
 2. **Estimate genre/register** from the text, not from your preferred style.
 3. **Scan for S1 first**: double passive, `가지고 있다`, formulaic conclusions, emoji/decorative headings, pronoun translationese, repeated connectives.
-4. **Scan for S2 density**: `통해`, `에 대해`, `할 수 있다`, hedging, `것이다`, nominalization, uniform sentence lengths.
-5. **Rewrite in this order**:
+4. **Scan for user style overrides**: passive verbs that can become active, overly colloquial operational verbs, and compressed 한자어 such as `고권한`.
+5. **Scan for S2 density**: `통해`, `에 대해`, `할 수 있다`, hedging, `것이다`, nominalization, uniform sentence lengths.
+6. **Rewrite in this order**:
    1. D — signature phrases and hollow conclusions;
    2. A — translationese and Korean particle/voice repairs;
    3. I/G — bound nouns, unnecessary possibility, hedging;
    4. H/F/B — connectives, modifiers, English terms;
    5. C/J — structure and decoration;
    6. E — final rhythm pass.
-6. **Protect do-not-touch spans** before and after editing.
-7. **Self-check** against `quick-rules.md`.
-8. **Report** what changed and any residual risk.
+7. **Protect do-not-touch spans** before and after editing.
+8. **Self-check** against `quick-rules.md`.
+9. **Report** what changed and any residual risk.
 
 ## Output Format
 
@@ -189,6 +198,7 @@ When editing files, write the polished output to a new file unless the user expl
 5. **Touching direct quotes.** Quoted text is evidence, not style material. Leave it intact unless the user explicitly asks to edit the quote.
 6. **Assuming every `~의` is wrong.** The taxonomy targets double-particle forms like `~에서의`, `~에로의`, `~으로부터의`; simple `~의` is not automatically an error.
 7. **Treating detector-bypass as the goal.** The goal is faithful Korean editing. Do not promise evasion of external AI detectors.
+8. **Leaving operational text too rough.** In manuals and runbooks, avoid unnecessarily vivid verbs such as `죽는다` or `잡는다` when `멈춘다`, `설정한다`, or `연결한다` carries the same meaning more calmly.
 
 ## Verification Checklist
 
