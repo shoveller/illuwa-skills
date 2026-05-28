@@ -80,6 +80,7 @@ Apply these local preferences whenever they do not conflict with meaning preserv
 2. **Soften overly colloquial or harsh operational wording.** In guides, lecture notes, reports, and runbooks, replace casual verbs with calmer task-oriented verbs when the meaning permits: `죽는다` → `멈춘다`, `잡는다` → `설정한다` or `연결한다` depending on context.
 3. **Unpack dense Sino-Korean compounds.** When a compressed or heavy 한자어 makes the sentence stiff, replace it with plain Korean without weakening the claim: `고권한`/`고권` → `높은 권한`, `권한 상승` → `권한이 높아짐` when appropriate.
 4. **Compress translated English essay tone into dry technical-blog prose.** Avoid English-essay calques and explanatory filler such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, and `충분하지 않다`. Prefer short sentences, verbs over abstract nouns, minimal connectives, and direct wording. `핵심은 ~이다` is acceptable; extended essay-like framing is not.
+5. **Use clear topic-first sentences.** Put the action or conclusion first when it saves the reader time, then separate conditions or caveats into the next sentence. Prefer `세션을 백그라운드로 분리합니다. 세션을 끝내지 않습니다.` over `세션을 완전히 끝내지 않고, 백그라운드로 분리합니다.`
 
 ## Modes
 
@@ -137,7 +138,7 @@ Severity convention:
 1. **Save or isolate the input** if operating on files. Keep the original intact.
 2. **Estimate genre/register** from the text, not from your preferred style.
 3. **Scan for S1 first**: double passive, `가지고 있다`, formulaic conclusions, emoji/decorative headings, pronoun translationese, repeated connectives.
-4. **Scan for user style overrides**: passive verbs that can become active, overly colloquial operational verbs, compressed 한자어 such as `고권한`, and English-essay calques such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, `충분하지 않다`.
+4. **Scan for user style overrides**: passive verbs that can become active, overly colloquial operational verbs, compressed 한자어 such as `고권한`, English-essay calques such as `~라는 관점`, `문제의식`, `유용하다`, `실생활`, `충분하지 않다`, and sentences that hide the main action behind a condition or subordinate clause.
 5. **Scan for S2 density**: `통해`, `에 대해`, `할 수 있다`, hedging, `것이다`, nominalization, uniform sentence lengths.
 6. **Rewrite in this order**:
    1. D — signature phrases and hollow conclusions;
@@ -201,6 +202,7 @@ When editing files, write the polished output to a new file unless the user expl
 7. **Treating detector-bypass as the goal.** The goal is faithful Korean editing. Do not promise evasion of external AI detectors.
 8. **Leaving operational text too rough.** In manuals and runbooks, avoid unnecessarily vivid verbs such as `죽는다` or `잡는다` when `멈춘다`, `설정한다`, or `연결한다` carries the same meaning more calmly.
 9. **Keeping translated English essay framing.** For technical blogs, lecture notes, and runbooks, do not keep explanatory essay scaffolding such as `문제의식`, `~라는 관점`, `유용하다`, `실생활`, or `충분하지 않다`; compress it into short, direct technical prose.
+10. **Burying the point in a long subordinate clause.** If a sentence starts with a caveat or condition and delays the main action, split it into topic-first sentences so the reader sees the intent immediately.
 
 ## Verification Checklist
 
@@ -209,7 +211,7 @@ When editing files, write the polished output to a new file unless the user expl
 - [ ] Genre and register match the input unless the user asked otherwise.
 - [ ] S1 patterns were removed or explicitly justified as retained.
 - [ ] Repeated S2 density was reduced without over-editing.
-- [ ] User style overrides were checked when applicable: passive→active, overly colloquial operational verbs softened, dense Sino-Korean compounds unpacked, and translated English essay tone compressed into dry technical-blog prose without meaning drift.
+- [ ] User style overrides were checked when applicable: passive→active, overly colloquial operational verbs softened, dense Sino-Korean compounds unpacked, translated English essay tone compressed into dry technical-blog prose, and buried main actions rewritten as clear topic-first sentences without meaning drift.
 - [ ] No new examples, metaphors, facts, or causal claims were added.
 - [ ] Change rate feels below 30%; if not, risk is reported.
 - [ ] The user receives either the polished text or a file path plus a concise report.
