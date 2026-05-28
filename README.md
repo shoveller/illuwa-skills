@@ -20,6 +20,7 @@ npx skills add shoveller/illuwa-skills --skill cloudflare-mcpagent
 npx skills add shoveller/illuwa-skills --skill edgefastmcp-cloudflare
 npx skills add shoveller/illuwa-skills --skill hono-cloudflare-worker
 npx skills add shoveller/illuwa-skills --skill youtube-scrap
+npx skills add shoveller/illuwa-skills --skill yoonmoon
 ```
 
 ## Available Skills
@@ -35,6 +36,7 @@ npx skills add shoveller/illuwa-skills --skill youtube-scrap
 | [edgefastmcp-cloudflare](#edgefastmcp-cloudflare) | Build stateless MCP servers on Cloudflare Workers without Durable Objects. |
 | [hono-cloudflare-worker](#hono-cloudflare-worker) | Wire Cloudflare Worker entrypoints with Hono routes, Wrangler config, Vite, bindings, and route tests. |
 | [youtube-scrap](#youtube-scrap) | Investigate lecture-style YouTube/web sources with NotebookLM, preserve chronology and nuance, and save frontmatter-bearing Markdown notes when a vault is specified. |
+| [yoonmoon](#yoonmoon) | Polish Korean AI- or translation-sounding prose into natural Korean while preserving meaning, facts, register, and genre. |
 
 ---
 
@@ -181,6 +183,22 @@ Core behavior:
 - Preserve the source's intent, emphasis, warning strength, and chronology.
 - Use real timestamps as the outline when available; never invent MM:SS values.
 - If the user specifies a Markdown vault/wiki, save the final note there as a frontmatter-bearing wiki document, then validate and report the path/URL.
+
+---
+
+### yoonmoon
+
+Use when a Korean text should be polished so it no longer reads like AI- or translation-generated prose while preserving meaning, facts, numbers, proper nouns, quotations, genre, and register.
+
+```bash
+/yoonmoon
+```
+
+Core behavior:
+- Preserve source meaning before fluency; do not add claims, examples, metaphors, or stance changes.
+- Detect and reduce Korean AI-tell patterns such as translationese, formulaic conclusions, uniform rhythm, excessive connectives, bound nouns, and visual decoration.
+- Use the ported `quick-rules`, `ai-tell-taxonomy`, and `rewriting-playbook` references from `epoko77-ai/im-not-ai`.
+- Run fast single-pass polishing by default; use strict detect → rewrite → fidelity audit → naturalness review when precision is needed.
 
 ---
 
