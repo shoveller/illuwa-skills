@@ -136,6 +136,7 @@ Writing rules:
 - Keep comparisons faithful: do not make a rejected option sound recommended, or a minor caveat sound fatal.
 - Separate host/server actions from client/mobile/browser actions when the source teaches operations.
 - Prefer careful paraphrase over fabricated direct quotation unless a verified transcript is available.
+- If the user's agent has a Korean polishing skill such as `yoonmoon`, run the completed document through that skill before saving or returning it. Treat polishing as a faithful readability pass: keep timestamps, source facts, warnings, commands, frontmatter, and heading hierarchy intact while making the Korean sentences natural.
 
 ### 5. Save to a Markdown vault when specified
 
@@ -200,6 +201,7 @@ Before reporting completion:
 - [ ] NotebookLM notebook/source/analysis completed or failure documented
 - [ ] Timestamp basis identified
 - [ ] No fabricated MM:SS values
+- [ ] Korean document polished with `yoonmoon` or equivalent skill when available
 - [ ] Markdown note includes YAML frontmatter when saved to a vault
 - [ ] Destination path written when requested
 - [ ] Markdown lint/read-back/health check run when available
