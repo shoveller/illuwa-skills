@@ -32,11 +32,17 @@ Separate by volatility and testability, not by aesthetic symmetry.
 
 ## Strict Functional Baseline
 
+Reference files:
+
+- `references/profile-binding-branching.md` — typed registry maps and guard clauses for profile/config dispatch.
+- `references/auth-session-functional-examples.md` — functional TypeScript patterns for auth/session tutorial snippets, including Better Auth/Hono-style runtime factories, schema generation boundaries, protected API helpers, and browser auth client helpers.
+
 - Prefer `const` for local bindings; treat `let` as a refactor smell until a pure value-returning helper has been considered.
 - Do not mutate function parameters or parameter-object properties; create and return a new value or copy.
 - Prefer returning new values over accumulator/state mutation.
 - Allow a little duplication when it keeps helpers pure and avoids hidden mutation.
 - Prefer `const helper = (...) => {}` for new local helpers when project conventions allow it; keep existing public APIs, framework contracts, or hoisting-dependent declarations intact.
+- Apply this baseline to documentation and tutorial snippets too. When writing sample TypeScript for the user, avoid sneaking policy into compact ternaries or expression-heavy examples; model the desired style with named pure helpers, guard clauses, or thin entrypoints plus shared common logic. For auth/session tutorials specifically, use `references/auth-session-functional-examples.md` so examples cover runtime factory, schema-generation boundary, server-side session verification, command creation, and client action helpers without turning the route/component into a logic blob.
 
 ## Collection Transformation Rules
 
@@ -50,6 +56,7 @@ Separate by volatility and testability, not by aesthetic symmetry.
 - Replace conditional expressions with named pure state or message helpers plus guard-clause branching.
 - Do not use ternary expressions, IIFEs, switch statements, `else`, or `else if` to hide branching inside expression-heavy paths.
 - Prefer early returns, guard clauses, lookup maps, or named branch helpers.
+- For config/profile dispatch, prefer a typed registry map checked with `satisfies Record<...>` plus a separate guard clause for runtime absence; see `references/profile-binding-branching.md`.
 - Prefer block-bodied guard clauses when the formatter/linter allows it, so later side-effect additions are visible in review.
 - Name booleans positively when possible: prefer `succeeded`, `isValid`, and `enableCheck` over `notFailed`, `isNotValid`, and `disableCheck`.
 - Prefer pure helpers that return state, labels, messages, or data objects instead of framework output.

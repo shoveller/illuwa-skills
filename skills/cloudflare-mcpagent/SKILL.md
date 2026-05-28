@@ -172,6 +172,36 @@ If the project uses Wrangler autoconfig or framework-managed config, verify that
 - Set alarms only when absent or when a meaningful schedule changes.
 - Store large bodies in R2/D1/origin systems; keep DO storage small.
 
+### Transcript and Run Artifact Pattern
+
+When using `McpAgent` as a terminal/sandbox control plane, do not assume it automatically makes sandbox PTY or command transcripts durable. The application must explicitly observe output and append it to a transcript store.
+
+Use this layering:
+
+- **McpAgent / DO instance memory:** live tail ring buffer, hot session/run maps, recent events for `read_terminal_buffer`-style tools.
+- **DO storage:** small durable boundaries only — run/session metadata, cursors, sequence numbers, R2 chunk pointers, status transitions.
+- **R2:** long transcript chunks, stdout/stderr bodies, patches, review artifacts, and other large append-only output.
+
+Avoid writing every terminal event directly to `ctx.storage`. Prefer batching or chunk flushing (for example by byte threshold, short interval, or run/session close), then store only the latest pointer/cursor in DO storage. If a WebSocket pass-through is opaque and cannot be observed, record visible `run_command` results first and document that interactive PTY transcript capture is deferred.
+
+## Async Sandbox Run Pattern
+
+When an MCP server fronts Cloudflare Sandbox or other long-running command execution, keep MCP as the control plane and move execution/feedback to durable Cloudflare primitives. See `references/sandbox-async-run-feedback.md` for the detailed pattern.
+
+Recommended MVP:
+
+```text
+Hermes -> MCP enqueue_run -> Command Queue -> Workspace DO/Sandbox
+Sandbox -> DO/D1 state + R2 logs/artifacts -> Feedback Queue -> Hermes Webhook/Gateway -> original reply target
+```
+
+Rules:
+
+- `enqueue_run` should return quickly with `{ runId, status: "queued" }`; do not hold the MCP request open for terminal completion.
+- Use MCP for short control/query operations: `enqueue_run`, `get_run_status`, `get_run_logs`, `cancel_run`, and later `send_run_input`.
+- Put full logs and artifacts in R2; queue only small event payloads, summaries, cursors, and references.
+- Let Hermes (or the owning agent) produce the final Discord/GitHub/user-facing response. MCP should not become the feedback poster.
+
 ## Transport Notes
 
 Cloudflare's Agents SDK supports multiple MCP paths. For production remote clients, Streamable HTTP is the normal default. SSE is legacy compatibility. RPC is useful for internal Agent-to-McpAgent connections in the same Worker/runtime and does not replace public authentication.

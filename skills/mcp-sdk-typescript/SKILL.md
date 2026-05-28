@@ -138,6 +138,7 @@ Keep these out of the core MCP module until the adapter layer:
 - Runtime auth: API key, OAuth, Cloudflare Access, mTLS.
 - Persistence: Durable Objects, D1, R2, Redis, filesystem.
 - Cache policy: TTL, stale-while-revalidate, batching.
+- Interactive terminal/WebSocket transcript buffering: inspect whether the terminal route is pass-through or relay-based before claiming MCP owns the stream buffer. See `references/terminal-streaming-buffer-pattern.md`.
 
 A good project shape:
 

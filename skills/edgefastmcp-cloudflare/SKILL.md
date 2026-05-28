@@ -130,6 +130,7 @@ For production or third-party clients, prefer Cloudflare Access or OAuth-capable
 - Prefer upstream HTTP caching, Cloudflare Cache API, or deterministic recomputation.
 - Keep secrets in Worker secrets/bindings, not tool arguments or MCP resources.
 - Return compact content blocks; store large outputs in the right backing service and return links/ids when appropriate.
+- If a tool needs an external sandbox/container/runner, defer `prepareSandbox()` or equivalent setup until that specific tool's `execute` function runs. Do not pay sandbox setup cost during route/module construction or MCP discovery. When the tool accepts an explicit runner ID such as `sandboxId`, use an explicit selector and test that the ID chooses the runtime, not just the transcript/log key. See `references/workflow-harness-edgefastmcp-sandbox.md`.
 
 ## Escalation Triggers
 
@@ -153,6 +154,8 @@ pnpm test
 pnpm build
 pnpm wrangler deploy --dry-run
 ```
+
+For EdgeFastMCP integrations, add unit coverage that verifies the expected tools are registered and that heavyweight dependencies are invoked only inside tool `execute` handlers. For sandbox-backed tools, see `references/workflow-harness-edgefastmcp-sandbox.md`.
 
 Then smoke test the deployed or dev URL with an MCP client or adapter:
 

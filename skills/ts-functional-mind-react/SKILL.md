@@ -63,6 +63,8 @@ Separate React concerns by volatility and testability, not by aesthetic symmetry
 
 ## Props Drilling and State Store Rules
 
+Reference pattern: see `references/app-shell-zustand-sidebar-extraction.md` for splitting a large app shell into a sidebar component plus a feature-scoped Zustand store while preserving routing and app-boundary callbacks.
+
 - Before adding a state library, inspect `package.json` and existing imports; if the project already uses Zustand, Recoil, Jotai, Redux, or another store, follow that established pattern.
 - If no state library is established and one feature has clear props drilling across board/dialog/leaf layers, prefer Zustand over Recoil for a small feature-local state machine.
 - Prefer a feature-scoped Provider store over a module-level singleton when screen re-entry could otherwise preserve stale dialogs, errors, loading flags, or draft form data.
