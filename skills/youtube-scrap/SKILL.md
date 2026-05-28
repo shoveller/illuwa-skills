@@ -137,6 +137,8 @@ Writing rules:
 - Separate host/server actions from client/mobile/browser actions when the source teaches operations.
 - Prefer careful paraphrase over fabricated direct quotation unless a verified transcript is available.
 - If the user's agent has a Korean polishing skill such as `yoonmoon`, run the completed document through that skill before saving or returning it. Treat polishing as a faithful readability pass: keep timestamps, source facts, warnings, commands, frontmatter, and heading hierarchy intact while making the Korean sentences natural.
+- For detailed Korean faithful-polishing guardrails, see `references/korean-faithful-polishing.md`.
+- For the common case where NotebookLM can analyze a YouTube source but transcript tools/yt-dlp are blocked or exact MM:SS timestamps are unavailable, follow `references/notebooklm-youtube-scrap-grounding.md`: keep NotebookLM's source-order chronology, label `정확한 MM:SS 타임스탬프 확인 불가`, and do not fabricate timestamp headings.
 
 ### 5. Save to a Markdown vault when specified
 
