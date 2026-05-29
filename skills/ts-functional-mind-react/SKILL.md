@@ -56,6 +56,8 @@ Separate React concerns by volatility and testability, not by aesthetic symmetry
 - Do not hide multiple unrelated effects in one generic hook; each hook name must describe the lifecycle it owns.
 - Keep one state owner for one workflow until a split has clear ownership boundaries.
 - Prefer explicit props over new context during the first refactor pass.
+- At extracted component boundaries, prefer passing props with the same local identifier as the prop name. A prop assignment such as `onClick={handleClick}` is a refactoring signal unless the boundary is still the native DOM/event-handler layer. Rename or adapt at the container boundary, then pass `onClick={onClick}` into the leaf component.
+- If a component only works because multiple same-shaped props receive differently named handlers, split the component by intent instead of encoding the distinction through handler names.
 - Do not move API calls while also moving JSX unless the behavior is already tested.
 - Do not introduce `useMemo` or `useCallback` merely because code moved.
 - Preserve existing ids, keys, aria labels, and click/drag event ordering.
