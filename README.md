@@ -19,6 +19,7 @@ npx skills add shoveller/illuwa-skills --skill cloudflare-do-storage-caching
 npx skills add shoveller/illuwa-skills --skill cloudflare-mcpagent
 npx skills add shoveller/illuwa-skills --skill edgefastmcp-cloudflare
 npx skills add shoveller/illuwa-skills --skill hono-cloudflare-worker
+npx skills add shoveller/illuwa-skills --skill github-repo-scrap
 npx skills add shoveller/illuwa-skills --skill youtube-scrap
 npx skills add shoveller/illuwa-skills --skill yoonmoon
 ```
@@ -35,6 +36,7 @@ npx skills add shoveller/illuwa-skills --skill yoonmoon
 | [cloudflare-mcpagent](#cloudflare-mcpagent) | Build stateful remote MCP servers on Cloudflare Workers with Agents SDK `McpAgent` and Durable Objects. |
 | [edgefastmcp-cloudflare](#edgefastmcp-cloudflare) | Build stateless MCP servers on Cloudflare Workers without Durable Objects. |
 | [hono-cloudflare-worker](#hono-cloudflare-worker) | Wire Cloudflare Worker entrypoints with Hono routes, Wrangler config, Vite, bindings, and route tests. |
+| [github-repo-scrap](#github-repo-scrap) | Record one or more GitHub repositories as concise wiki notes covering the problem solved, behavior, future usefulness, and caveats. |
 | [youtube-scrap](#youtube-scrap) | Investigate lecture-style YouTube/web sources with NotebookLM, preserve chronology and nuance, and save frontmatter-bearing Markdown notes when a vault is specified. |
 | [yoonmoon](#yoonmoon) | Polish Korean AI- or translation-sounding prose into natural Korean while preserving meaning, facts, register, and genre. |
 
@@ -167,6 +169,23 @@ Core behavior:
 - Let Hono own HTTP routing and small status/help pages.
 - Preserve Worker named exports such as Durable Object classes.
 - Verify with route tests, `wrangler types`, typecheck, and build.
+
+---
+
+### github-repo-scrap
+
+Use when asked to record one or more GitHub repositories into a Markdown/KiwiFS wiki for future reuse.
+
+```bash
+/github-repo-scrap
+```
+
+Core behavior:
+- Trigger on `레포 스크랩`, `깃허브 스크랩`, `repo scrap`, or bare `스크랩` when GitHub repository URLs are present.
+- Normalize GitHub URLs and `owner/repo` shorthand before writing.
+- Search the target wiki/vault first to avoid duplicate repository notes.
+- Record the problem solved, what the repo does, future usefulness, and caveats/unknowns.
+- Keep claims grounded in README/docs/repo metadata and verify the written Markdown note when possible.
 
 ---
 
