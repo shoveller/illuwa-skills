@@ -140,6 +140,7 @@ Writing rules:
 - For detailed Korean faithful-polishing guardrails, see `references/korean-faithful-polishing.md`.
 - For the common case where NotebookLM can analyze a YouTube source but transcript tools/yt-dlp are blocked or exact MM:SS timestamps are unavailable, follow `references/notebooklm-youtube-scrap-grounding.md`: keep NotebookLM's source-order chronology, label `정확한 MM:SS 타임스탬프 확인 불가`, and do not fabricate timestamp headings.
 - For bare Discord requests like a YouTube URL plus `스크랩`, follow `references/discord-bare-youtube-scrap.md`: infer `00 Inbox/youtube/YYYY-MM-DD-<topic-slug>.md`, use Korean plain technical prose, include a 기능/구성요소 table for tutorial/workflow videos, and verify through KiwiFS lint/health checks.
+- If NotebookLM or direct YouTube transcript extraction is unavailable due to auth/setup/bot-confirmation state, follow `references/fallback-when-notebooklm-or-transcript-unavailable.md`: use public metadata, web extraction summaries, and official links; label timestamp basis and limitations; do not invent transcript details or overgeneralize the setup failure as a durable tool limitation.
 
 ### 5. Save to a Markdown vault when specified
 
